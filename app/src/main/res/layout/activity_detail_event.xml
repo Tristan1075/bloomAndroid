@@ -35,7 +35,6 @@
                 android:fontFamily="@font/open_sans_light"
                 android:textColor="@color/white"
                 />
-
             <Button
                 android:id="@+id/detail_event_activity_see_more_button"
                 android:layout_width="wrap_content"
@@ -48,8 +47,15 @@
                 android:fontFamily="@font/open_sans_light"
                 android:textColor="@color/colorAccent"
                 />
-
         </LinearLayout>
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="180sp"
+            android:id="@+id/detail_event_activity_map"
+            android:layout_margin="20sp"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/details_event_activity_recycler_view"
             android:layout_width="match_parent"
@@ -57,13 +63,5 @@
             android:layout_weight="3"
             tools:itemCount="3"
             tools:listitem="@layout/ticket_cell" />
-        <TextView
-            android:id="@+id/saaa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20sp"
-            android:padding="10sp"
-            android:background="@drawable/border_event"
-            />
     </LinearLayout>
 </ScrollView>

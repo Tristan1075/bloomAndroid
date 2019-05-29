@@ -6,11 +6,24 @@
     android:orientation="vertical"
     android:background="@color/colorBackground"
     tools:context=".data.service.views.LoginActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/bloom" />
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_activity_facebook_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerInParent="true"/>
+        android:paddingTop="20sp"
+        android:paddingBottom="20sp"
+        android:paddingLeft="20sp"
+        android:textAlignment="center"
+        android:paddingRight="20sp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100sp"
+        />
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.example.bloomandroid.data.service.views;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,13 +22,9 @@ public class BuyTicketActivity extends AppCompatActivity {
     @BindView(R.id.buy_ticket_activity_name_textView) TextView nameTextView;
     @BindView(R.id.buy_ticket_activity_price_textView) TextView priceTextView;
     @BindView(R.id.buy_ticket_activity_imageView) ImageView eventImageView;
+    @BindView(R.id.buy_ticket_activity_pay_button) Button payButton;
     private Ticket ticket;
     private  String imageURI;
-
-    String API_GET_TOKEN = Config.API + "/paiement";
-    String API_CHECKOUT = Config.API + "/paiement/checkout";
-    String token, amount;
-    HashMap<String, String> paramsHash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +40,10 @@ public class BuyTicketActivity extends AppCompatActivity {
             nameTextView.setText(ticket.getName());
             priceTextView.setText(ticket.getPrice());
         }
+
+        payButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, BuyTicketFormActivity.class);
+            startActivity(intent);
+        });
     }
 }

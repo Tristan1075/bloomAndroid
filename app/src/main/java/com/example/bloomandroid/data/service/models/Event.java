@@ -8,6 +8,8 @@ public class Event implements Serializable {
     private String title;
     private String description;
     private String imageURl;
+    private String longitude;
+    private String latitude;
 
     public String getId(){ return id; }
     public void setId(String id){ this.id = id; }
@@ -32,6 +34,12 @@ public class Event implements Serializable {
     public void setImageURl(String imageURl) {
         this.imageURl = imageURl;
     }
+
+    public String getLongitude() {return longitude; }
+    public void setLongitude(String longitude) { this.longitude = longitude; }
+
+    public String getLatitude() {return latitude; }
+    public void setLatitude(String latitude) { this.latitude = latitude; }
 
     @Override
     public String toString() {

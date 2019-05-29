@@ -31,12 +31,15 @@ public class LoginActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        Intent intent = new Intent(this, MainActivity.class);
 
         callbackManager = CallbackManager.Factory.create();
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                loginResult.getAccessToken().getUserId();
+                String userID = loginResult.getAccessToken().getUserId();
+                intent.putExtra("userID", userID);
+                startActivity(intent);
             }
 
             @Override

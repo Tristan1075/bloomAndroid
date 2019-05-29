@@ -7,4 +7,5 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">2167798919935451</string>
+    <string name="google_map_api_key">AIzaSyCT0YVI63LkBtGaaW8s6DI7K0XLKwEkviQ</string>
 </resources>

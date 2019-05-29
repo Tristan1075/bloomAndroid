@@ -1,12 +1,11 @@
 package com.example.bloomandroid.data.service.views;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,18 +13,30 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.bloomandroid.R;
 import com.example.bloomandroid.data.service.Config;
-import com.example.bloomandroid.data.service.dto.EventAdapter;
 import com.example.bloomandroid.data.service.dto.TicketAdapter;
 import com.example.bloomandroid.data.service.models.Event;
 import com.example.bloomandroid.data.service.models.Ticket;
 import com.example.bloomandroid.data.service.utils.NetworkProvider;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailEventActivity extends AppCompatActivity {
+public class DetailEventActivity extends FragmentActivity implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
+
+    private static LatLng LOCATION;
+
+
+    private Marker mLocation;
+    private GoogleMap mMap;
     private TicketAdapter ticketAdapter;
     private Event event;
     @BindView(R.id.detail_event_activity_imageView)
@@ -34,7 +45,6 @@ public class DetailEventActivity extends AppCompatActivity {
     TextView descriptionView;
     @BindView(R.id.details_event_activity_recycler_view)
     RecyclerView ticketRecyclerView;
-
     @BindView(R.id.detail_event_activity_see_more_button)
     Button seeMoreButton;
 
@@ -53,6 +63,7 @@ public class DetailEventActivity extends AppCompatActivity {
         setTitle(event.getTitle());
         Glide.with(this).load(Config.API + "/images/" + event.getImageURl()).into(imageView);
         descriptionView.setText(event.getDescription());
+        LOCATION = new LatLng(Double.parseDouble(event.getLatitude()), Double.parseDouble(event.getLongitude()));
 
         seeMoreButton.setOnClickListener(v -> {
             if (seeMoreButton.getText().toString().equalsIgnoreCase("See more...")){
@@ -63,6 +74,13 @@ public class DetailEventActivity extends AppCompatActivity {
                 seeMoreButton.setText("Show more...");
             }
         });
+
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.detail_event_activity_map);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
+
     }
 
     private void initRecyclerView() {
@@ -92,5 +110,20 @@ public class DetailEventActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION, 15));
+        mLocation = mMap.addMarker(new MarkerOptions()
+                .position(LOCATION)
+                .title("SYDNEY"));
+        mLocation.setTag(0);
     }
 }

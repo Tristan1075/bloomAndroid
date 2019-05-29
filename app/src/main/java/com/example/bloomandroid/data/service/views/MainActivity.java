@@ -90,8 +90,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_tickets) {
 
-        } else if (id == R.id.nav_settings) {
-
+        } else if (id == R.id.nav_profile) {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

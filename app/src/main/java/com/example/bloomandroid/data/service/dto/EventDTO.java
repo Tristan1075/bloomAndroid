@@ -12,12 +12,18 @@ public class EventDTO {
     String description;
     @SerializedName("image")
     String image;
+    @SerializedName("longitude")
+    String longitude;
+    @SerializedName("latitude")
+    String latitude;
 
-    public EventDTO(String id, String title, String description, String image) {
+    public EventDTO(String id, String title, String description, String image, String longitude, String latitude) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.image = image;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public String getId(){ return id; }
@@ -34,5 +40,8 @@ public class EventDTO {
         return image;
     }
 
+    public String getLongitude() { return longitude; }
+
+    public String getLatitude() { return latitude; }
 
 }
