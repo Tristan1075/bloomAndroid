@@ -9,6 +9,7 @@ import com.example.bloomandroid.data.service.dto.TicketDTO;
 import com.example.bloomandroid.data.service.dto.mapper.EventMapper;
 import com.example.bloomandroid.data.service.dto.mapper.PromotionalCodeMapper;
 import com.example.bloomandroid.data.service.dto.mapper.TicketMapper;
+import com.example.bloomandroid.data.service.models.BoughtTicket;
 import com.example.bloomandroid.data.service.models.Event;
 import com.example.bloomandroid.data.service.models.PromotionalCode;
 import com.example.bloomandroid.data.service.models.StringParams;
@@ -83,6 +84,20 @@ public class NetworkProvider {
 
       @Override public void onFailure(Call<PromotionalCodeDTO> call, Throwable t) {
         listener.onError(t);
+      }
+    });
+  }
+
+  public void buyTicket(BoughtTicket boughtTicket){
+    bloomAndroidAPI.buyTicket(boughtTicket).enqueue(new Callback<String>(){
+      @Override
+      public void onResponse(Call call, Response response) {
+
+      }
+
+      @Override
+      public void onFailure(Call call, Throwable t) {
+
       }
     });
   }

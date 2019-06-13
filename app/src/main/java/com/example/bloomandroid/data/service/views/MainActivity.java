@@ -89,7 +89,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, FavoritesActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_tickets) {
-
+            Intent intent = new Intent(this, ListTicketsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);

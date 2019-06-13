@@ -17,7 +17,7 @@ public class TicketMapper {
     }
 
     private static Ticket map(TicketDTO ticketDTO) {
-        Ticket ticket = new Ticket(ticketDTO.getName(), ticketDTO.getPrice(), ticketDTO.getQuantity());
+        Ticket ticket = new Ticket(ticketDTO.get_id(), ticketDTO.getIdEvent(), ticketDTO.getName(), ticketDTO.getPrice(), ticketDTO.getQuantity());
         return ticket;
     }
 }

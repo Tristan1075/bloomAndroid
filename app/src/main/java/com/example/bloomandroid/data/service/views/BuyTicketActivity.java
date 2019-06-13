@@ -1,6 +1,8 @@
 package com.example.bloomandroid.data.service.views;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,15 +11,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.example.bloomandroid.R;
 import com.example.bloomandroid.data.service.Config;
+import com.example.bloomandroid.data.service.GlobalClass;
+import com.example.bloomandroid.data.service.models.BoughtTicket;
 import com.example.bloomandroid.data.service.models.PromotionalCode;
 import com.example.bloomandroid.data.service.models.StringParams;
 import com.example.bloomandroid.data.service.models.Ticket;
 import com.example.bloomandroid.data.service.utils.NetworkProvider;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,7 +50,13 @@ public class BuyTicketActivity extends AppCompatActivity {
     private Ticket ticket;
     private  String imageURI;
     private String idEvent;
+    private Integer newPrice;
     private Boolean promotionalCodeOpen = false;
+    private static final int PAYPAL_REQUEST_CODE = 9999;
+    static PayPalConfiguration payPalConfiguration = new PayPalConfiguration()
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .clientId(Config.PAYPAL_CLIEND_ID);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +72,7 @@ public class BuyTicketActivity extends AppCompatActivity {
             Glide.with(this).load(Config.   API + "/images/" + imageURI).into(eventImageView);
             nameTextView.setText(ticket.getName());
             priceTextView.setText(ticket.getPrice());
+            newPrice = Integer.parseInt(ticket.getPrice());
         }
         submitPromotionalCode.setVisibility(View.GONE);
         promotionalCodeEditText.setVisibility(View.GONE);
@@ -70,7 +92,7 @@ public class BuyTicketActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(PromotionalCode promotionalCode) {
-                Integer newPrice = Integer.parseInt(priceTextView.getText().toString()) - Integer.parseInt(promotionalCode.getPrice());
+                newPrice = Integer.parseInt(priceTextView.getText().toString()) - Integer.parseInt(promotionalCode.getPrice());
                 priceTextView.setText(newPrice.toString());
                 submitPromotionalCode.setVisibility(View.GONE);
                 promotionalCodeEditText.setVisibility(View.GONE);
@@ -85,7 +107,32 @@ public class BuyTicketActivity extends AppCompatActivity {
 
 
         payButton.setOnClickListener(v -> {
-
+            PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(newPrice),
+                    "EUR",
+                    "Ticket order",
+                    PayPalPayment.PAYMENT_INTENT_SALE);
+            Intent intent = new Intent(this, PaymentActivity.class);
+            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration);
+            intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
+            startActivityForResult(intent, PAYPAL_REQUEST_CODE);
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == PAYPAL_REQUEST_CODE){
+            if(resultCode == RESULT_OK){
+                PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                if(confirmation != null){
+                    NetworkProvider.getInstance().buyTicket(new BoughtTicket(((GlobalClass) this.getApplication()).getUserId(), ticket));
+                    Intent intent = new Intent(this, ListTicketsActivity.class);
+                    startActivity(intent);
+                }
+            } else if(resultCode == Activity.RESULT_CANCELED){
+                Toast.makeText(this, "Payment cancel", Toast.LENGTH_SHORT).show();
+            } else if(resultCode == PaymentActivity.RESULT_EXTRAS_INVALID){
+                Toast.makeText(this, "Invalid payment", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_event_lighter"
+    android:layout_marginHorizontal="20sp"
+    android:layout_marginVertical="10sp"
+    >
+    <ImageView
+        android:layout_width="120sp"
+        android:layout_height="120sp"
+        android:src="@drawable/party"
+    />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="20sp"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="11sp"
+        android:textColor="@color/textGray"
+        android:text="Vendredi, 14 Juin . 23h"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:text="Embuscade 2Nd Anniversary"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="L'embuscade"
+            android:textSize="10sp"
+            android:textColor="@color/textBlue"
+            android:fontFamily="@font/open_sans_light"
+            />
+    </LinearLayout>
+
+</LinearLayout>

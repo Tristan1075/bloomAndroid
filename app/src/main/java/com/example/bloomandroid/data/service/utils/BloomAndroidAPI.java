@@ -3,8 +3,10 @@ package com.example.bloomandroid.data.service.utils;
 import com.example.bloomandroid.data.service.dto.EventDTO;
 import com.example.bloomandroid.data.service.dto.PromotionalCodeDTO;
 import com.example.bloomandroid.data.service.dto.TicketDTO;
+import com.example.bloomandroid.data.service.models.BoughtTicket;
 import com.example.bloomandroid.data.service.models.PromotionalCode;
 import com.example.bloomandroid.data.service.models.StringParams;
+import com.example.bloomandroid.data.service.models.Ticket;
 
 import java.util.List;
 
@@ -22,4 +24,7 @@ public interface BloomAndroidAPI {
 
   @POST("/promotionalCode/{idEvent}")
   Call<PromotionalCodeDTO> verifyPromotionalCode(@Path("idEvent") String idEvent, @Body StringParams stringParams);
+
+  @POST("/paiement/ticket")
+  Call<String> buyTicket(@Body BoughtTicket boughtTicket);
 }

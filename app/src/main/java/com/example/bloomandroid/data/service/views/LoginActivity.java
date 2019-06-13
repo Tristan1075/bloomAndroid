@@ -8,6 +8,7 @@ import android.telecom.Call;
 import android.widget.TextView;
 
 import com.example.bloomandroid.R;
+import com.example.bloomandroid.data.service.GlobalClass;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -32,13 +33,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         Intent intent = new Intent(this, MainActivity.class);
-
         callbackManager = CallbackManager.Factory.create();
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                String userID = loginResult.getAccessToken().getUserId();
-                intent.putExtra("userID", userID);
+                String userId = loginResult.getAccessToken().getUserId();
+                ((GlobalClass) getApplication()).setUserId(userId);
                 startActivity(intent);
             }
 
