@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".data.service.views.BuyTicketFormActivity"></activity>
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+        <activity android:name=".data.service.views.BuyTicketFormActivity"/>
         <activity android:name=".data.service.views.ProfileActivity" />
         <activity
             android:name=".data.service.views.LoginActivity"

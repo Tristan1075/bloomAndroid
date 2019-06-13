@@ -94,6 +94,7 @@ public class DetailEventActivity extends FragmentActivity implements GoogleMap.O
             bundle.putSerializable("ticket", ticket);
             intent.putExtras(bundle);
             intent.putExtra("imageURI", event.getImageURl());
+            intent.putExtra("idEvent", event.getId());
             startActivity(intent);
         });
     }

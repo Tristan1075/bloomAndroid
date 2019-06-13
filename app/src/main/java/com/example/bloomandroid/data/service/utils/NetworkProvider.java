@@ -1,11 +1,17 @@
 package com.example.bloomandroid.data.service.utils;
 
+import android.util.Log;
+
 import com.example.bloomandroid.data.service.Config;
 import com.example.bloomandroid.data.service.dto.EventDTO;
+import com.example.bloomandroid.data.service.dto.PromotionalCodeDTO;
 import com.example.bloomandroid.data.service.dto.TicketDTO;
 import com.example.bloomandroid.data.service.dto.mapper.EventMapper;
+import com.example.bloomandroid.data.service.dto.mapper.PromotionalCodeMapper;
 import com.example.bloomandroid.data.service.dto.mapper.TicketMapper;
 import com.example.bloomandroid.data.service.models.Event;
+import com.example.bloomandroid.data.service.models.PromotionalCode;
+import com.example.bloomandroid.data.service.models.StringParams;
 import com.example.bloomandroid.data.service.models.Ticket;
 
 import java.util.List;
@@ -62,6 +68,20 @@ public class NetworkProvider {
       }
 
       @Override public void onFailure(Call<List<TicketDTO>> call, Throwable t) {
+        listener.onError(t);
+      }
+    });
+  }
+
+  public void verifyPromotionalCode(String idEvent, StringParams stringParams, Listener<PromotionalCode> listener){
+    bloomAndroidAPI.verifyPromotionalCode(idEvent, stringParams).enqueue(new Callback<PromotionalCodeDTO>() {
+      @Override public void onResponse(Call<PromotionalCodeDTO> call, Response<PromotionalCodeDTO> response) {
+        PromotionalCodeDTO promotionalCodeDTO = response.body();
+        PromotionalCode promotionalCode = PromotionalCodeMapper.map(promotionalCodeDTO);
+        listener.onSuccess(promotionalCode);
+      }
+
+      @Override public void onFailure(Call<PromotionalCodeDTO> call, Throwable t) {
         listener.onError(t);
       }
     });
