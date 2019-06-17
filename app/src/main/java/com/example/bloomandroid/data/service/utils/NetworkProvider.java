@@ -48,8 +48,6 @@ public class NetworkProvider {
       @Override public void onResponse(Call<List<EventDTO>> call, Response<List<EventDTO>> response) {
         List<EventDTO> eventDTOList = response.body();
         List<Event> eventList = EventMapper.map(eventDTOList);
-
-
         listener.onSuccess(eventList);
       }
 
@@ -102,6 +100,20 @@ public class NetworkProvider {
     });
   }
 
+  public void getUserTickets(String userId, Listener<List<Event>> listener) {
+    bloomAndroidAPI.getUserTickets(userId).enqueue(new Callback<List<EventDTO>>() {
+      @Override public void onResponse(Call<List<EventDTO>> call, Response<List<EventDTO>> response) {
+        List<EventDTO> eventDTOList = response.body();
+        List<Event> eventList = EventMapper.map(eventDTOList);
+
+        listener.onSuccess(eventList);
+      }
+
+      @Override public void onFailure(Call<List<EventDTO>> call, Throwable t) {
+        listener.onError(t);
+      }
+    });
+  }
   public interface Listener<T> {
     void onSuccess(T data);
 

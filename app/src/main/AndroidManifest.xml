@@ -9,16 +9,17 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".data.service.GlobalClass"
         android:allowBackup="true"
         android:appComponentFactory="whateverString"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name="com.example.bloomandroid.data.service.GlobalClass"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".data.service.views.ListTicketsActivity"></activity>
+        <activity android:name=".data.service.views.ResumeTicket"></activity>
+        <activity android:name=".data.service.views.ListTicketsActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"

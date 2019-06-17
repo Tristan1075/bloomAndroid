@@ -27,4 +27,7 @@ public interface BloomAndroidAPI {
 
   @POST("/paiement/ticket")
   Call<String> buyTicket(@Body BoughtTicket boughtTicket);
+
+  @GET("/tickets/user/{userId}")
+  Call<List<EventDTO>> getUserTickets(@Path("userId") String userId);
 }

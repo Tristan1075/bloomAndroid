@@ -74,6 +74,7 @@ public class BuyTicketActivity extends AppCompatActivity {
             priceTextView.setText(ticket.getPrice());
             newPrice = Integer.parseInt(ticket.getPrice());
         }
+        setTitle("Buy ticket");
         submitPromotionalCode.setVisibility(View.GONE);
         promotionalCodeEditText.setVisibility(View.GONE);
         promotionalCodeButton.setOnClickListener((View v) -> {

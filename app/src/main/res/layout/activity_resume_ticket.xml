@@ -1,9 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".data.service.views.ResumeTicketActivity">
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    tools:context=".data.service.views.ResumeTicket">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20sp"
+        android:padding="20sp"
+        android:orientation="vertical"
+        android:background="@drawable/border_ticket"
+        >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Regular"
+        android:fontFamily="@font/open_sans_semi_bold"
+        android:textSize="16sp"
+        android:textColor="@color/colorBackground"
+            />
+        <TextView
+            android:layout_marginTop="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EVENEMENT"
+            android:fontFamily="@font/open_sans_semi_bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Embuscade 2nd ANNIVERSARY"
+            android:textColor="@color/colorBackground"
+            android:fontFamily="@font/open_sans_semi_bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="L'embuscade"
+            android:textColor="@color/textBlue"
+            />
+        <TextView
+            android:layout_marginTop="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DATES DE L'EVENEMENT"
+            android:fontFamily="@font/open_sans_semi_bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Du vendredi, 14 juin - 23:00"
+            android:textSize="11sp"
+            android:textColor="@color/colorBackground"
+            android:fontFamily="@font/open_sans_light"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBackground"
+            android:text="Au samedi, 15 juin - 10:00"
+            android:fontFamily="@font/open_sans_light"
+            android:textSize="11sp"
+            />
+        <TextView
+            android:layout_marginTop="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BILLET N°"
+            android:fontFamily="@font/open_sans_semi_bold"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12356664345 - "
+            android:textSize="11sp"
+            android:textColor="@color/colorBackground"
+            android:fontFamily="@font/open_sans_light"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16.99"
+                android:textSize="11sp"
+                android:textColor="@color/colorBackground"
+                android:fontFamily="@font/open_sans_light"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="€"
+                android:textSize="11sp"
+                android:textColor="@color/colorBackground"
+                android:fontFamily="@font/open_sans_light"
+                />
+        </LinearLayout>
+    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
