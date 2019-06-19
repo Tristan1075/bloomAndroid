@@ -11,12 +11,12 @@ public class TicketMapper {
     public static List<Ticket> map(List<TicketDTO> ticketDTOList) {
         List<Ticket> ticketList = new ArrayList<>();
         for (TicketDTO ticketDTO : ticketDTOList) {
-            ticketList.add(map(ticketDTO));
+            ticketList.add(mapOne(ticketDTO));
         }
         return ticketList;
     }
 
-    private static Ticket map(TicketDTO ticketDTO) {
+    public static Ticket mapOne(TicketDTO ticketDTO) {
         Ticket ticket = new Ticket(ticketDTO.get_id(), ticketDTO.getIdEvent(), ticketDTO.getName(), ticketDTO.getPrice(), ticketDTO.getQuantity());
         return ticket;
     }

@@ -114,6 +114,25 @@ public class NetworkProvider {
       }
     });
   }
+
+  public void getTicketDetails(String userId, StringParams idEvent, Listener<Ticket> listener) {
+    bloomAndroidAPI.getTicketDetails(userId, idEvent).enqueue(new Callback<TicketDTO>() {
+
+      @Override
+      public void onResponse(Call<TicketDTO> call, Response<TicketDTO> response) {
+        TicketDTO ticketDTO = response.body();
+        Ticket ticket = TicketMapper.mapOne(ticketDTO);
+        Log.d("ticket", ticket.toString());
+        listener.onSuccess(ticket);
+      }
+
+      @Override
+      public void onFailure(Call<TicketDTO> call, Throwable t) {
+        listener.onError(t);
+      }
+    });
+  }
+
   public interface Listener<T> {
     void onSuccess(T data);
 

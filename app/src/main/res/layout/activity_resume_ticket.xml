@@ -16,6 +16,7 @@
         android:background="@drawable/border_ticket"
         >
     <TextView
+        android:id="@+id/resume_ticket_activity_ticket_name_textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Regular"
@@ -31,6 +32,7 @@
             android:fontFamily="@font/open_sans_semi_bold"
             />
         <TextView
+            android:id="@+id/resume_ticket_activity_event_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Embuscade 2nd ANNIVERSARY"
@@ -38,6 +40,7 @@
             android:fontFamily="@font/open_sans_semi_bold"
             />
         <TextView
+            android:id="@+id/resume_ticket_activity_collectif_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="L'embuscade"
@@ -79,14 +82,25 @@
             android:orientation="horizontal"
             >
         <TextView
+            android:id="@+id/resume_ticket_activity_ticket_id_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12356664345 - "
+            android:text="12356664345"
             android:textSize="11sp"
             android:textColor="@color/colorBackground"
             android:fontFamily="@font/open_sans_light"
             />
             <TextView
+                android:id="@+id/resume_ticket_activity_ticket_id_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" - "
+                android:textSize="11sp"
+                android:textColor="@color/colorBackground"
+                android:fontFamily="@font/open_sans_light"
+                />
+            <TextView
+                android:id="@+id/resume_ticket_activity_ticket_price_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="16.99"
@@ -104,5 +118,15 @@
                 />
         </LinearLayout>
     </LinearLayout>
+    <ImageView
+        android:id="@+id/resume_ticket_activity_qrcode_imageView"
+        android:layout_width="200sp"
+        android:layout_height="200sp"
+        android:src="@drawable/qrcode"
+        android:layout_gravity="center"
+        android:layout_marginTop="20sp"
+        android:background="@drawable/border_event_lighter"
+        android:padding="20sp"
+        />
 
 </LinearLayout>

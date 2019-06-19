@@ -41,6 +41,7 @@ public class TicketBoughtAdapter extends RecyclerView.Adapter<TicketBoughtAdapte
     public void onBindViewHolder(@NonNull TicketBoughtAdapter.EventViewHolder eventViewHolder, int i) {
         final Event event = eventsList.get(i);
         eventViewHolder.titleTextView.setText(event.getTitle());
+        eventViewHolder.associationNameTextView.setText(event.getAssociationName());
         Glide.with(eventViewHolder.itemView).load(Config.API + "/images/" + event.getImageURl()).into(eventViewHolder.backgroundImageView);
 
         if (itemClickListener != null) {
@@ -55,6 +56,7 @@ public class TicketBoughtAdapter extends RecyclerView.Adapter<TicketBoughtAdapte
     class EventViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.list_ticket_event_imageView) ImageView backgroundImageView;
         @BindView(R.id.list_ticket_name_textView) TextView titleTextView;
+        @BindView(R.id.list_ticket_collectif_name_textView) TextView associationNameTextView;
 
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -10,6 +10,7 @@ public class Event implements Serializable {
     private String imageURl;
     private String longitude;
     private String latitude;
+    private String associationName;
 
     public String getId(){ return id; }
     public void setId(String id){ this.id = id; }
@@ -40,6 +41,9 @@ public class Event implements Serializable {
 
     public String getLatitude() {return latitude; }
     public void setLatitude(String latitude) { this.latitude = latitude; }
+
+    public String getAssociationName(){ return associationName; }
+    public void setAssociationName(String associationName){ this.associationName = associationName; }
 
     @Override
     public String toString() {
