@@ -2,9 +2,12 @@ package com.example.bloomandroid.data.service;
 
 import android.app.Application;
 
+import com.facebook.AccessToken;
+
 public class GlobalClass extends Application {
 
     private String userId;
+    private AccessToken tokenId;
 
 
     public String getUserId() {
@@ -12,6 +15,13 @@ public class GlobalClass extends Application {
     }
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public AccessToken getTokenId() {
+        return tokenId;
+    }
+    public void setTokenId(AccessToken tokenId) {
+        this.tokenId = tokenId;
     }
 
 }

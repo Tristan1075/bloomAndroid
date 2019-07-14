@@ -6,17 +6,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.bloomandroid.R;
 import com.example.bloomandroid.data.service.Config;
+import com.example.bloomandroid.data.service.GlobalClass;
 import com.example.bloomandroid.data.service.dto.TicketAdapter;
 import com.example.bloomandroid.data.service.models.Event;
 import com.example.bloomandroid.data.service.models.Ticket;
 import com.example.bloomandroid.data.service.utils.NetworkProvider;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,6 +29,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -33,7 +40,6 @@ import butterknife.ButterKnife;
 public class DetailEventActivity extends FragmentActivity implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
 
     private static LatLng LOCATION;
-
 
     private Marker mLocation;
     private GoogleMap mMap;
@@ -47,6 +53,8 @@ public class DetailEventActivity extends FragmentActivity implements GoogleMap.O
     RecyclerView ticketRecyclerView;
     @BindView(R.id.detail_event_activity_see_more_button)
     Button seeMoreButton;
+    @BindView(R.id.detail_event_activity_see_friends_button)
+    LinearLayout seeFriendButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,12 +83,17 @@ public class DetailEventActivity extends FragmentActivity implements GoogleMap.O
             }
         });
 
+        seeFriendButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SeeFriendActivity.class);
+            intent.putExtra("idEvent", event.getId());
+            startActivity(intent);
+        });
+
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.detail_event_activity_map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
-
     }
 
     private void initRecyclerView() {
@@ -124,7 +137,7 @@ public class DetailEventActivity extends FragmentActivity implements GoogleMap.O
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION, 15));
         mLocation = mMap.addMarker(new MarkerOptions()
                 .position(LOCATION)
-                .title("SYDNEY"));
+                .title(event.getTitle()));
         mLocation.setTag(0);
     }
 }

@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         Intent intent = new Intent(this, MainActivity.class);
@@ -38,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 String userId = loginResult.getAccessToken().getUserId();
+                ((GlobalClass) getApplication()).setTokenId(loginResult.getAccessToken());
                 ((GlobalClass) getApplication()).setUserId(userId);
                 startActivity(intent);
             }

@@ -10,10 +10,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.bloomandroid.R;
+import com.example.bloomandroid.data.service.GlobalClass;
 import com.example.bloomandroid.data.service.utils.NetworkProvider;
 import com.example.bloomandroid.data.service.dto.EventAdapter;
 import com.example.bloomandroid.data.service.models.Event;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
         initRecyclerView();
         loadData();
-
+        Log.d("token", ((GlobalClass) getApplication()).getTokenId().toString());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -56,8 +58,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
 

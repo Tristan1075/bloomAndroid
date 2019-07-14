@@ -1,9 +1,11 @@
 package com.example.bloomandroid.data.service.utils;
 
+import com.example.bloomandroid.data.service.dto.DataDTO;
 import com.example.bloomandroid.data.service.dto.EventDTO;
 import com.example.bloomandroid.data.service.dto.PromotionalCodeDTO;
 import com.example.bloomandroid.data.service.dto.TicketDTO;
 import com.example.bloomandroid.data.service.models.BoughtTicket;
+import com.example.bloomandroid.data.service.models.FriendsParticipating;
 import com.example.bloomandroid.data.service.models.PromotionalCode;
 import com.example.bloomandroid.data.service.models.StringParams;
 import com.example.bloomandroid.data.service.models.Ticket;
@@ -33,4 +35,7 @@ public interface BloomAndroidAPI {
 
   @POST("/tickets/user/{userId}")
   Call<TicketDTO> getTicketDetails(@Path("userId") String userId, @Body StringParams idEvent);
+
+  @POST("/events/friends")
+  Call<List<DataDTO>> getFriendsParticipating(@Body FriendsParticipating friendsParticipating);
 }

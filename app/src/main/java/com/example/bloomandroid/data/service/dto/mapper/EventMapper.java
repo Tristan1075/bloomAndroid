@@ -25,6 +25,7 @@ public class EventMapper {
         event.setLongitude(eventDTO.getLongitude());
         event.setLatitude(eventDTO.getLatitude());
         event.setAssociationName(eventDTO.getAssociationName());
+        event.setDateEvent(eventDTO.getDateEvent());
         return event;
     }
 }

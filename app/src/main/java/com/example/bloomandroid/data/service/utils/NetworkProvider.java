@@ -3,6 +3,7 @@ package com.example.bloomandroid.data.service.utils;
 import android.util.Log;
 
 import com.example.bloomandroid.data.service.Config;
+import com.example.bloomandroid.data.service.dto.DataDTO;
 import com.example.bloomandroid.data.service.dto.EventDTO;
 import com.example.bloomandroid.data.service.dto.PromotionalCodeDTO;
 import com.example.bloomandroid.data.service.dto.TicketDTO;
@@ -11,6 +12,7 @@ import com.example.bloomandroid.data.service.dto.mapper.PromotionalCodeMapper;
 import com.example.bloomandroid.data.service.dto.mapper.TicketMapper;
 import com.example.bloomandroid.data.service.models.BoughtTicket;
 import com.example.bloomandroid.data.service.models.Event;
+import com.example.bloomandroid.data.service.models.FriendsParticipating;
 import com.example.bloomandroid.data.service.models.PromotionalCode;
 import com.example.bloomandroid.data.service.models.StringParams;
 import com.example.bloomandroid.data.service.models.Ticket;
@@ -105,7 +107,6 @@ public class NetworkProvider {
       @Override public void onResponse(Call<List<EventDTO>> call, Response<List<EventDTO>> response) {
         List<EventDTO> eventDTOList = response.body();
         List<Event> eventList = EventMapper.map(eventDTOList);
-
         listener.onSuccess(eventList);
       }
 
@@ -122,7 +123,6 @@ public class NetworkProvider {
       public void onResponse(Call<TicketDTO> call, Response<TicketDTO> response) {
         TicketDTO ticketDTO = response.body();
         Ticket ticket = TicketMapper.mapOne(ticketDTO);
-        Log.d("ticket", ticket.toString());
         listener.onSuccess(ticket);
       }
 
@@ -132,6 +132,23 @@ public class NetworkProvider {
       }
     });
   }
+
+  public void getFriendsParticipating(String userId, List<DataDTO> dataDTOS, String idEvent, Listener<List<DataDTO>> listener){
+    bloomAndroidAPI.getFriendsParticipating(new FriendsParticipating(userId, dataDTOS, idEvent)).enqueue(new Callback<List<DataDTO>>() {
+      @Override
+      public void onResponse(Call<List<DataDTO>> call, Response<List<DataDTO>> friends) {
+        Log.d("friends body", friends.body().toString());
+        listener.onSuccess(friends.body());
+
+      }
+
+      @Override
+      public void onFailure(Call<List<DataDTO>> call, Throwable t) {
+        listener.onError(t);
+      }
+    });
+  }
+
 
   public interface Listener<T> {
     void onSuccess(T data);

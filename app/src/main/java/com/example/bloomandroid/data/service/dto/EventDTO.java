@@ -18,8 +18,10 @@ public class EventDTO {
     String latitude;
     @SerializedName("promotionalCode")
     String associationName;
+    @SerializedName("dateEvent")
+    String dateEvent;
 
-    public EventDTO(String id, String title, String description, String image, String longitude, String latitude, String associationName) {
+    public EventDTO(String id, String title, String description, String image, String longitude, String latitude, String associationName, String dateEvent) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -27,6 +29,7 @@ public class EventDTO {
         this.longitude = longitude;
         this.latitude = latitude;
         this.associationName = associationName;
+        this.dateEvent = dateEvent;
     }
 
     public String getId(){ return id; }
@@ -48,5 +51,7 @@ public class EventDTO {
     public String getLatitude() { return latitude; }
 
     public String getAssociationName() { return associationName; }
+
+    public String getDateEvent(){ return dateEvent; }
 
 }

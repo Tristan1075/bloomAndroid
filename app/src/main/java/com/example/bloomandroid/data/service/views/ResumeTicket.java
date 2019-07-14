@@ -36,6 +36,7 @@ public class ResumeTicket extends AppCompatActivity {
     @BindView(R.id.resume_ticket_activity_ticket_name_textView) TextView ticketName;
     @BindView(R.id.resume_ticket_activity_ticket_price_textView) TextView ticketPrice;
     @BindView(R.id.resume_ticket_activity_collectif_name) TextView associationName;
+    @BindView(R.id.resume_ticket_activity_dateTextView) TextView dateTextView;
 
 
     @Override
@@ -51,10 +52,23 @@ public class ResumeTicket extends AppCompatActivity {
         NetworkProvider.getInstance().getTicketDetails(((GlobalClass) getApplication()).getUserId(), new StringParams(event.getId()), new NetworkProvider.Listener<Ticket>() {
             @Override
             public void onSuccess(Ticket t) {
-                ticket = t;
                 ticketId.setText(t.get_id());
                 ticketName.setText(t.getName());
                 ticketPrice.setText(t.getPrice());
+                eventName.setText(event.getTitle());
+                associationName.setText(event.getAssociationName());
+                dateTextView.setText(event.getDateEvent());
+
+                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+                BitMatrix bitMatrix = null;
+                try {
+                    bitMatrix = multiFormatWriter.encode(Config.API + "/tickets/qrcode/" + ((GlobalClass) getApplication()).getUserId() + "/" + t.get_id(), BarcodeFormat.QR_CODE, 500, 500);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+                qrCodeImageView.setImageBitmap(bitmap);
             }
 
             @Override
@@ -62,18 +76,5 @@ public class ResumeTicket extends AppCompatActivity {
 
             }
         });
-        eventName.setText(event.getTitle());
-        associationName.setText(event.getAssociationName());
-
-        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-        BitMatrix bitMatrix = null;
-        try {
-            bitMatrix = multiFormatWriter.encode(Config.API + "/tickets/qrcode/" + event.getId(), BarcodeFormat.QR_CODE, 500, 500);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
-        BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-        Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-        qrCodeImageView.setImageBitmap(bitmap);
     }
 }

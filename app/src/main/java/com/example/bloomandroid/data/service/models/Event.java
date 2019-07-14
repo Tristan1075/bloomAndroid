@@ -11,6 +11,7 @@ public class Event implements Serializable {
     private String longitude;
     private String latitude;
     private String associationName;
+    private String dateEvent;
 
     public String getId(){ return id; }
     public void setId(String id){ this.id = id; }
@@ -44,6 +45,9 @@ public class Event implements Serializable {
 
     public String getAssociationName(){ return associationName; }
     public void setAssociationName(String associationName){ this.associationName = associationName; }
+
+    public String getDateEvent(){ return dateEvent; }
+    public void setDateEvent(String dateEvent){ this.dateEvent = dateEvent; }
 
     @Override
     public String toString() {

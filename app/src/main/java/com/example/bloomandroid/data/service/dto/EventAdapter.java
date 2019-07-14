@@ -42,6 +42,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         final Event event = eventsList.get(i);
         eventViewHolder.titleTextView.setText(event.getTitle());
         eventViewHolder.associationNameTextView.setText(event.getAssociationName());
+        eventViewHolder.dateTextView.setText(event.getDateEvent());
+
         Glide.with(eventViewHolder.itemView).load(Config.API + "/images/" + event.getImageURl()).into(eventViewHolder.backgroundImageView);
 
         if (itemClickListener != null) {
@@ -57,6 +59,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         @BindView(R.id.home_activity_event_image_view) ImageView backgroundImageView;
         @BindView(R.id.home_activity_event_text_view) TextView titleTextView;
         @BindView(R.id.home_activity_collectif_name) TextView associationNameTextView;
+        @BindView(R.id.home_activity_date_text_view) TextView dateTextView;
 
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);

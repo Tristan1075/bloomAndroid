@@ -48,6 +48,31 @@
                 android:textColor="@color/colorAccent"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/detail_event_activity_see_friends_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/com_facebook_button_background"
+            android:layout_marginHorizontal="20sp"
+            android:paddingHorizontal="10sp"
+            android:paddingVertical="5sp"
+            >
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="25sp"
+                android:src="@drawable/facebook"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="See friends participating"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:fontFamily="@font/open_sans_light"
+                android:gravity="center"
+                />
+        </LinearLayout>
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
