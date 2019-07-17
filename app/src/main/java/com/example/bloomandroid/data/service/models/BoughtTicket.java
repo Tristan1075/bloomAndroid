@@ -4,10 +4,12 @@ public class BoughtTicket {
 
     private String userId;
     private Ticket ticket;
+    private Integer newPrice;
 
-    public BoughtTicket(String userId, Ticket ticket) {
+    public BoughtTicket(String userId, Ticket ticket, Integer newPrice) {
         this.userId = userId;
         this.ticket = ticket;
+        this.newPrice = newPrice;
     }
 
     public String getUserId() {
@@ -25,5 +27,8 @@ public class BoughtTicket {
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
+
+    public Integer getNewPrice(){ return newPrice; }
+    public void setNewPrice(Integer newPrice){ this.newPrice = newPrice; }
 
 }

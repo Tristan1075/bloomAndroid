@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.facebook.AccessToken;
 
-public class GlobalClass extends Application {
+public class BloomAndroidApplication extends Application {
 
     private String userId;
     private AccessToken tokenId;

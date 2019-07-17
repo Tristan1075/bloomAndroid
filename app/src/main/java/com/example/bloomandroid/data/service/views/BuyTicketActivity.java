@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.bloomandroid.R;
 import com.example.bloomandroid.data.service.Config;
-import com.example.bloomandroid.data.service.GlobalClass;
+import com.example.bloomandroid.data.service.BloomAndroidApplication;
 import com.example.bloomandroid.data.service.models.BoughtTicket;
 import com.example.bloomandroid.data.service.models.PromotionalCode;
 import com.example.bloomandroid.data.service.models.StringParams;
@@ -29,11 +28,7 @@ import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.math.BigDecimal;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,8 +47,8 @@ public class BuyTicketActivity extends AppCompatActivity {
     private String idEvent;
     private Integer newPrice;
     private Boolean promotionalCodeOpen = false;
-    private static final int PAYPAL_REQUEST_CODE = 9999;
-    static PayPalConfiguration payPalConfiguration = new PayPalConfiguration()
+    private Integer PAYPAL_REQUEST_CODE = 9999;
+    private PayPalConfiguration payPalConfiguration = new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIEND_ID);
 
@@ -106,7 +101,6 @@ public class BuyTicketActivity extends AppCompatActivity {
             }
         }));
 
-
         payButton.setOnClickListener(v -> {
             PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(newPrice),
                     "EUR",
@@ -125,7 +119,7 @@ public class BuyTicketActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK){
                 PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
                 if(confirmation != null){
-                    NetworkProvider.getInstance().buyTicket(new BoughtTicket(((GlobalClass) this.getApplication()).getUserId(), ticket));
+                    NetworkProvider.getInstance().buyTicket(new BoughtTicket(((BloomAndroidApplication) this.getApplication()).getUserId(), ticket, newPrice));
                     Intent intent = new Intent(this, ListTicketsActivity.class);
                     startActivity(intent);
                 }

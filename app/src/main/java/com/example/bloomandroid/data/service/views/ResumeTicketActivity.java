@@ -4,13 +4,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bloomandroid.R;
 import com.example.bloomandroid.data.service.Config;
-import com.example.bloomandroid.data.service.GlobalClass;
+import com.example.bloomandroid.data.service.BloomAndroidApplication;
 import com.example.bloomandroid.data.service.models.Event;
 import com.example.bloomandroid.data.service.models.StringParams;
 import com.example.bloomandroid.data.service.models.Ticket;
@@ -21,12 +20,10 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ResumeTicket extends AppCompatActivity {
+public class ResumeTicketActivity extends AppCompatActivity {
 
     private Event event;
     private Ticket ticket;
@@ -49,7 +46,7 @@ public class ResumeTicket extends AppCompatActivity {
         if (bundle != null) {
             event = (Event) bundle.getSerializable("event");
         }
-        NetworkProvider.getInstance().getTicketDetails(((GlobalClass) getApplication()).getUserId(), new StringParams(event.getId()), new NetworkProvider.Listener<Ticket>() {
+        NetworkProvider.getInstance().getTicketDetails(((BloomAndroidApplication) getApplication()).getUserId(), new StringParams(event.getId()), new NetworkProvider.Listener<Ticket>() {
             @Override
             public void onSuccess(Ticket t) {
                 ticketId.setText(t.get_id());
@@ -62,7 +59,7 @@ public class ResumeTicket extends AppCompatActivity {
                 MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
                 BitMatrix bitMatrix = null;
                 try {
-                    bitMatrix = multiFormatWriter.encode(Config.API + "/tickets/qrcode/" + ((GlobalClass) getApplication()).getUserId() + "/" + t.get_id(), BarcodeFormat.QR_CODE, 500, 500);
+                    bitMatrix = multiFormatWriter.encode(Config.API + "/tickets/qrcode/" + ((BloomAndroidApplication) getApplication()).getUserId() + "/" + t.get_id(), BarcodeFormat.QR_CODE, 500, 500);
                 } catch (WriterException e) {
                     e.printStackTrace();
                 }

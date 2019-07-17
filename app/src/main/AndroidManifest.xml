@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:name=".data.service.GlobalClass"
+        android:name=".data.service.BloomAndroidApplication"
         android:allowBackup="true"
         android:appComponentFactory="whateverString"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
         <activity android:name=".data.service.views.SeeFriendActivity"></activity>
-        <activity android:name=".data.service.views.ResumeTicket" />
+        <activity android:name=".data.service.views.ResumeTicketActivity" />
         <activity android:name=".data.service.views.ListTicketsActivity" />
 
         <meta-data

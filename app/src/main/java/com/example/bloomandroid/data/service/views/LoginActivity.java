@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telecom.Call;
-import android.widget.TextView;
 
 import com.example.bloomandroid.R;
-import com.example.bloomandroid.data.service.GlobalClass;
+import com.example.bloomandroid.data.service.BloomAndroidApplication;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -37,8 +34,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 String userId = loginResult.getAccessToken().getUserId();
-                ((GlobalClass) getApplication()).setTokenId(loginResult.getAccessToken());
-                ((GlobalClass) getApplication()).setUserId(userId);
+                ((BloomAndroidApplication) getApplication()).setTokenId(loginResult.getAccessToken());
+                ((BloomAndroidApplication) getApplication()).setUserId(userId);
                 startActivity(intent);
             }
 

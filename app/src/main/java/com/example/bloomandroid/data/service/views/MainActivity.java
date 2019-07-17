@@ -15,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.bloomandroid.R;
-import com.example.bloomandroid.data.service.GlobalClass;
+import com.example.bloomandroid.data.service.BloomAndroidApplication;
 import com.example.bloomandroid.data.service.utils.NetworkProvider;
 import com.example.bloomandroid.data.service.dto.EventAdapter;
 import com.example.bloomandroid.data.service.models.Event;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity
         ButterKnife.bind(this);
         initRecyclerView();
         loadData();
-        Log.d("token", ((GlobalClass) getApplication()).getTokenId().toString());
+        Log.d("token", ((BloomAndroidApplication) getApplication()).getTokenId().toString());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -67,16 +67,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -84,9 +74,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-
-        } else if (id == R.id.nav_favorites) {
-            Intent intent = new Intent(this, FavoritesActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_tickets) {
             Intent intent = new Intent(this, ListTicketsActivity.class);

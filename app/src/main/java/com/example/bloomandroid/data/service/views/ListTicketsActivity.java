@@ -7,12 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.bloomandroid.R;
-import com.example.bloomandroid.data.service.GlobalClass;
-import com.example.bloomandroid.data.service.dto.EventAdapter;
-import com.example.bloomandroid.data.service.dto.TicketAdapter;
+import com.example.bloomandroid.data.service.BloomAndroidApplication;
 import com.example.bloomandroid.data.service.dto.TicketBoughtAdapter;
 import com.example.bloomandroid.data.service.models.Event;
-import com.example.bloomandroid.data.service.models.Ticket;
 import com.example.bloomandroid.data.service.utils.NetworkProvider;
 
 import java.util.List;
@@ -32,7 +29,7 @@ public class ListTicketsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_tickets);
         ButterKnife.bind(this);
-        loadData(((GlobalClass) getApplication()).getUserId());
+        loadData(((BloomAndroidApplication) getApplication()).getUserId());
         initRecyclerView();
         setTitle("My tickets");
     }
@@ -43,7 +40,7 @@ public class ListTicketsActivity extends AppCompatActivity {
         listTicketRecyclerView.setAdapter(ticketBoughtAdapter);
 
         ticketBoughtAdapter.setItemClickListener(event -> {
-            Intent intent = new Intent(this, ResumeTicket.class);
+            Intent intent = new Intent(this, ResumeTicketActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("event", event);
             intent.putExtras(bundle);

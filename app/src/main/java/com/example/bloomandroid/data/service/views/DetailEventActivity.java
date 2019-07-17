@@ -2,11 +2,9 @@ package com.example.bloomandroid.data.service.views;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,13 +13,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.bloomandroid.R;
 import com.example.bloomandroid.data.service.Config;
-import com.example.bloomandroid.data.service.GlobalClass;
 import com.example.bloomandroid.data.service.dto.TicketAdapter;
 import com.example.bloomandroid.data.service.models.Event;
 import com.example.bloomandroid.data.service.models.Ticket;
 import com.example.bloomandroid.data.service.utils.NetworkProvider;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,8 +24,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import org.json.JSONObject;
 
 import java.util.List;
 

@@ -7,17 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.bumptech.glide.Glide;
 import com.example.bloomandroid.R;
-import com.example.bloomandroid.data.service.Config;
-import com.example.bloomandroid.data.service.GlobalClass;
+import com.example.bloomandroid.data.service.BloomAndroidApplication;
 import com.example.bloomandroid.data.service.dto.DataDTO;
-import com.example.bloomandroid.data.service.dto.FriendsDTO;
 import com.example.bloomandroid.data.service.dto.ListFriendsAdapter;
 import com.example.bloomandroid.data.service.dto.ListFriendsDTO;
-import com.example.bloomandroid.data.service.dto.TicketBoughtAdapter;
-import com.example.bloomandroid.data.service.models.Event;
-import com.example.bloomandroid.data.service.models.Ticket;
 import com.example.bloomandroid.data.service.utils.NetworkProvider;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -54,12 +48,13 @@ public class SeeFriendActivity extends AppCompatActivity {
         gson = gsonBuilder.create();
 
         GraphRequest request = GraphRequest.newMeRequest(
-                ((GlobalClass) getApplication()).getTokenId(),
+                ((BloomAndroidApplication) getApplication()).getTokenId(),
                 (JSONObject object, GraphResponse response) -> {
 
                     ListFriendsDTO listFriendsDTO = gson.fromJson(object.toString(), ListFriendsDTO.class);
-                    Log.d("test list", listFriendsDTO.getFriendsDTO().getData().toString());
-                    loadData(listFriendsDTO.getFriendsDTO().getData());
+                    if(listFriendsDTO != null) {
+                        loadData(listFriendsDTO.getFriendsDTO().getData());
+                    }
                     initRecyclerView();
                 });
 
@@ -76,7 +71,7 @@ public class SeeFriendActivity extends AppCompatActivity {
     }
 
     private void loadData(List<DataDTO> data) {
-        NetworkProvider.getInstance().getFriendsParticipating(((GlobalClass) getApplication()).getTokenId().getUserId(), data, idEvent, new NetworkProvider.Listener<List<DataDTO>>() {
+        NetworkProvider.getInstance().getFriendsParticipating(((BloomAndroidApplication) getApplication()).getTokenId().getUserId(), data, idEvent, new NetworkProvider.Listener<List<DataDTO>>() {
             @Override
             public void onSuccess(List<DataDTO> data) {
                 Log.d("data", data.toString());
